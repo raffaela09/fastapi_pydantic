@@ -27,3 +27,9 @@ async def create_book(book: Book):
     # caso não exista, adiciona o livro na lista
     books.append(book)
     return book
+
+#retorna todos os livros cadastrados
+@app.get("/books/")
+async def get_all_books():
+    return books
+
