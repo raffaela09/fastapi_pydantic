@@ -33,3 +33,9 @@ async def create_book(book: Book):
 async def get_all_books():
     return books
 
+@app.get("/books/{book_id}", response_model=Book)
+async def get_book(book_id: int):
+    for book in books:
+        if book.id == book_id:
+            return book
+    raise HTTPException(status_code=404, detail="Livro não encontrado.")
