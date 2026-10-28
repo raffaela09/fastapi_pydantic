@@ -49,3 +49,13 @@ async def delete_book(book_id: int):
         raise HTTPException(status_code=404, detail="Livro não encontrado.")   
     books = [book for book in books if book.id != book_id]
     return
+
+#atualizacao do livro pelo id, caso nao exista retorna 404
+@app.put("/books/{book_id}", response_model=Book)
+async def update_book(book_id: int, updated_book: Book):
+    for index, book in enumerate(books):
+        if book.id == book_id:
+            books[index] = updated_book
+            return updated_book
+    raise HTTPException(status_code=404, detail="Livro não encontrado.")
+
